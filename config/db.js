@@ -2,19 +2,14 @@ const { Sequelize } = require("sequelize");
 
 const config = require("config");
 
-try {
-  module.exports = new Sequelize(
-    config.get("db_name"),
-    config.get("db_username"),
-    config.get("db_password"),
-    {
-      dialect: "postgres",
-      logging: false,
-      host: config.get("db_host"),
-      port: config.get("db_port"),
-    }
-  );
-  console.log("Connected to DB");
-} catch (error) {
-  console.log(error);
-}
+module.exports = new Sequelize(
+  config.get("db_name"),
+  config.get("db_username"),
+  config.get("db_password"),
+  {
+    dialect: "postgres",
+    logging: false,
+    host: config.get("db_host"),
+    port: config.get("db_port"),
+  }
+);

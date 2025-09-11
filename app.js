@@ -14,7 +14,8 @@ app.use("/api", mainRouter);
 const start = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ alter: true });
+    await sequelize.sync({ force: true });
+    console.log("Connected to DB");
     app.listen(PORT, () => {
       console.log(`Server started at: http://localhost:${PORT}`);
     });
