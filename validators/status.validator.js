@@ -1,4 +1,3 @@
-// /src/validations/status.validation.js
 const Joi = require("joi");
 
 const createStatusSchema = Joi.object({

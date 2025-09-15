@@ -14,7 +14,6 @@ const addPayment = async (req, res) => {
 // Get all
 const getPayments = async (req, res) => {
   try {
-    // Bu yerda ham filtrlash kerak (masalan, ma'lum bir shartnoma bo'yicha)
     const payments = await Payment.findAll();
     res.status(200).json({ message: "Successfully retrieved", data: payments });
   } catch (error) {
@@ -36,8 +35,7 @@ const getOnePayment = async (req, res) => {
   }
 };
 
-// UPDATE payment by ID
-// Izoh: Moliyaviy yozuvlarni o'zgartirish tavsiya etilmaydi.
+// Update
 const updatePayment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -54,8 +52,7 @@ const updatePayment = async (req, res) => {
   }
 };
 
-// DELETE payment by ID
-// Izoh: Moliyaviy yozuvlarni o'chirish tavsiya etilmaydi.
+// Delete
 const deletePayment = async (req, res) => {
   try {
     const { id } = req.params;

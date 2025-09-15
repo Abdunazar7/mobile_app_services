@@ -6,6 +6,9 @@ const {
   updateAdmin,
   deleteAdmin,
 } = require("../controllers/admin.controller");
+const authGuard = require("../middlewares/guards/auth.guard");
+const iscreatorGuard = require("../middlewares/guards/iscreator.guard");
+const selfGuard = require("../middlewares/guards/self.guard");
 
 const { validateJoi } = require("../middlewares/validators/joi.validator");
 const {
@@ -13,10 +16,10 @@ const {
   updateAdminSchema,
 } = require("../validators/admin.validator");
 
-router.post("/", validateJoi(createAdminSchema), addAdmin);
+router.post("/", authGuard, iscreatorGuard, validateJoi(createAdminSchema), addAdmin);
 router.get("/", getAdmins);
 router.get("/:id", getOneAdmin);
-router.put("/:id", validateJoi(updateAdminSchema), updateAdmin);
-router.delete("/:id", deleteAdmin);
+router.put("/:id", authGuard, selfGuard, validateJoi(updateAdminSchema), updateAdmin);
+router.delete("/:id", authGuard, iscreatorGuard, deleteAdmin);
 
 module.exports = router;

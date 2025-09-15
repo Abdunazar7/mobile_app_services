@@ -1,4 +1,3 @@
-// /src/validations/provider.validation.js
 const Joi = require("joi");
 
 const createProviderSchema = Joi.object({
@@ -17,7 +16,7 @@ const updateProviderSchema = Joi.object({
   phone: Joi.string().pattern(/^998[0-9]{9}$/).optional()
     .messages({ "string.pattern.base": "Telefon raqam '998xxxxxxxxx' formatida bo'lishi kerak." }),
   address: Joi.string().min(5).optional(),
-  is_active: Joi.boolean().optional(), // Admin tomonidan o'zgartirilishi mumkin
+  is_active: Joi.boolean().optional(),
 }).min(1);
 
 module.exports = {

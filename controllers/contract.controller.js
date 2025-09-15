@@ -4,17 +4,14 @@ const { sendErrorResponse } = require("../helpers/send.response.errors");
 // Create
 const addContract = async (req, res) => {
   try {
-    // client_id avtorizatsiya qilingan mijozdan olinadi
     const client_id = req.user.id;
     const { owner_id, service_id } = req.body;
 
-    // 1. Xizmat narxini backend'dan olish (mijoz o'zi narx belgilay olmasligi uchun)
     const service = await MobileAppService.findByPk(service_id);
     if (!service || service.owner_id !== owner_id) {
         return res.status(404).json({ message: "Service or provider not found"});
     }
 
-    // 2. Boshlang'ich statusni olish (masalan, 'pending')
     const initialStatus = await Status.findOne({ where: { name: 'pending' }});
     if (!initialStatus) {
         return res.status(500).json({ message: "Cannot get initial status"});
@@ -23,8 +20,8 @@ const addContract = async (req, res) => {
     const newContract = await Contract.create({
       ...req.body,
       client_id: client_id,
-      total_price: service.price, // Narxni xizmatdan olamiz
-      status_id: initialStatus.id // Statusni bazadan olamiz
+      total_price: service.price,
+      status_id: initialStatus.id
     });
     res.status(201).json({ message: "A new contract was concluded", data: newContract });
   } catch (error) {
@@ -35,8 +32,7 @@ const addContract = async (req, res) => {
 // Get all
 const getContracts = async (req, res) => {
   try {
-    // Avtorizatsiya: Foydalanuvchi rolidan kelib chiqib filtrlash kerak
-    const contracts = await Contract.findAll({ include: [{ all: true }] }); // Hamma bog'liq ma'lumotlar bilan
+    const contracts = await Contract.findAll({ include: [{ all: true }] });
     res.status(200).json({ message: "Successfully retrieved", data: contracts });
   } catch (error) {
     sendErrorResponse(res, error);
@@ -47,7 +43,6 @@ const getContracts = async (req, res) => {
 const getOneContract = async (req, res) => {
   try {
     const { id } = req.params;
-    // Avtorizatsiya: Faqat aloqador foydalanuvchilar ko'ra olishi kerak
     const contract = await Contract.findByPk(id, { include: [{ all: true }] });
     if (!contract) {
       return res.status(404).json({ message: "Shartnoma topilmadi" });

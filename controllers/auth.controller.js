@@ -69,7 +69,6 @@ const clientLogin = async (req, res) => {
     if (!isPassMatch) {
       return res.status(401).json({ message: "Invalid password or email" });
     }
-    // Client uchun payload
     const payload = {
       id: client.id,
       role: "client",
@@ -125,7 +124,6 @@ const providerLogin = async (req, res) => {
     if (!isPassMatch) {
       return res.status(401).json({ message: "Invalid password or email" });
     }
-    // Provider uchun payload
     const payload = {
       id: provider.id,
       role: "provider",
@@ -176,13 +174,11 @@ const refreshToken = async (req, res) => {
       return res.status(400).json({ message: "Token not found" });
     }
 
-    // 1. Tokendan payload'ni olamiz
     const payload = jwtService.verifyRefreshToken(refreshToken);
     if (!payload) {
       return res.status(401).json({ message: "Invalid or expired token" });
     }
 
-    // 2. Payload'dagi role'ga qarab to'g'ri Modelni tanlaymiz
     let Model;
     switch (payload.role) {
       case "admin":
@@ -198,19 +194,16 @@ const refreshToken = async (req, res) => {
         return res.status(401).json({ message: "Invalid role" });
     }
 
-    // 3. Foydalanuvchini topamiz
     const user = await Model.findByPk(payload.id);
     if (!user || !user.refresh_token) {
       return res.status(401).json({ message: "User not found or left the system" });
     }
 
-    // 4. Tokenni bazadagi xesh bilan solishtiramiz
     const isMatch = await bcrypt.compare(refreshToken, user.refresh_token);
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid token. Login first." });
     }
 
-    // 5. Yangi payload va yangi tokenlarni yaratamiz
     const newPayload = { id: user.id, role: payload.role };
     if (payload.role === "admin") {
       newPayload.is_creator = user.is_creator;

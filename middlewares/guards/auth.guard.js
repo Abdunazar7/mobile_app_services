@@ -13,9 +13,13 @@ module.exports = async (req, res, next) => {
       return sendErrorResponse({ message: "Token not found" }, res, 401);
     }
 
-    const verifiedAccessToken = await jwtService.verifyAccessToken(token);
-    req.author = verifiedAccessToken;
+    const decodedPayload = await jwtService.verifyAccessToken(token);
 
+    if (!decodedPayload) {
+      return sendErrorResponse({ message: "Invalid or expired token" }, res, 403);
+    }
+
+    req.user = decodedPayload;
     next();
   } catch (error) {
     sendErrorResponse(error, res, 403);

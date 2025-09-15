@@ -14,9 +14,8 @@ const updateAdminSchema = Joi.object({
   full_name: Joi.string().min(3).max(255).optional(),
   is_creator: Joi.boolean().optional(),
   is_active: Joi.boolean().optional(),
-}).min(1); // Yangilashda kamida bitta maydon bo'lishi kerak
+}).min(1);
 
-// Parolni o'zgartirish uchun alohida schema
 const changePasswordSchema = Joi.object({
   old_password: Joi.string().required(),
   new_password: Joi.string().min(6).required(),

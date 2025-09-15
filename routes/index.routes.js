@@ -9,7 +9,6 @@ const mobileAppServiceRouter = require("./service.routes");
 const contractRouter = require("./contract.routes");
 const paymentRouter = require("./payment.routes");
 
-// Har bir router uchun prefiks (URL'ning boshlang'ich qismi)
 router.use("/auth", authRouter);
 router.use("/admins", adminRouter);
 router.use("/providers", providerRouter);

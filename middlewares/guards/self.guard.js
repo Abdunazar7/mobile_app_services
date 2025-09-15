@@ -1,17 +1,23 @@
 const { sendErrorResponse } = require("../../helpers/send.response.errors");
 
-module.exports = async (req, res, next) => {
-  try {
-    if (req.params.id != req.author.id) {
-      return sendErrorResponse(
-        { message: "Only personal data is allowed" },
-        res,
-        403
-      );
-    }
-    next();
-  } catch (error) {
-    console.log(error);
-    sendErrorResponse(error, res, 403);
+module.exports = (req, res, next) => {
+  const { user } = req;
+  const { id } = req.params;
+
+  if (user.role === "admin") {
+    return next();
   }
+
+  if (user.id == id) {
+    return next();
+  }
+
+  sendErrorResponse(
+    res,
+    {
+      message:
+        "Only personnel data is alowed",
+    },
+    403
+  );
 };

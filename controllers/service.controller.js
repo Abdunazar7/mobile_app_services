@@ -4,9 +4,7 @@ const { sendErrorResponse } = require("../helpers/send.response.errors");
 // Create
 const addMobileAppService = async (req, res) => {
   try {
-    // Muhim: owner_id avtorizatsiya qilingan foydalanuvchidan (provider) olinishi kerak.
-    // Bu middleware orqali req.user ga joylashtiriladi.
-    const owner_id = req.user.id; // Misol uchun
+    const owner_id = req.user.id;
 
     const newService = await MobileAppService.create({
       ...req.body,
@@ -46,9 +44,8 @@ const getOneMobileAppService = async (req, res) => {
 const updateMobileAppService = async (req, res) => {
   try {
     const { id } = req.params;
-    // Avtorizatsiya: Faqat xizmat egasi yoki admin o'zgartira olishi kerak
     const [rows, [updatedService]] = await MobileAppService.update(req.body, {
-      where: { id /*, owner_id: req.user.id */ }, // Tekshiruv qo'shilishi kerak
+      where: { id },
       returning: true,
     });
     if (rows === 0) {
@@ -68,9 +65,8 @@ const updateMobileAppService = async (req, res) => {
 const deleteMobileAppService = async (req, res) => {
   try {
     const { id } = req.params;
-    // Avtorizatsiya: Faqat xizmat egasi yoki admin o'chira olishi kerak
     const deleted = await MobileAppService.destroy({
-      where: { id /*, owner_id: req.user.id */ },
+      where: { id },
     });
     if (!deleted) {
       return res
