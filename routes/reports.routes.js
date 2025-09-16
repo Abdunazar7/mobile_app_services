@@ -11,10 +11,10 @@ const roleGuard = require("../middlewares/guards/role.guard");
 
 router.use(authGuard, roleGuard("admin"));
 
-router.get("/services-by-date", getServicesByDateRange);
-router.get("/clients-by-date", getClientsByDateRange);
-router.get("/cancelled-clients-by-date", getClientsWhoCancelledByDateRange);
-router.get("/top-owners", getTopOwnersByService);
-router.get("/payments/client/:clientId", getPaymentHistoryByClient);
+router.get("/services-by-date", authGuard, roleGuard("admin"), getServicesByDateRange);
+router.get("/clients-by-date", authGuard, roleGuard("admin"), getClientsByDateRange);
+router.get("/cancelled-clients-by-date", authGuard, roleGuard("admin"), getClientsWhoCancelledByDateRange);
+router.get("/top-owners", authGuard, roleGuard("admin"), getTopOwnersByService);
+router.get("/payments/client/:clientId", authGuard, roleGuard("admin"), getPaymentHistoryByClient);
 
 module.exports = router;

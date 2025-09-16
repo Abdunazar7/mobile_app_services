@@ -3,7 +3,7 @@ const ApiError = require("../helpers/api.error");
 
 const getServicesByDateRange = async (req, res, next) => {
   try {
-    const { startDate, endDate } = req.query;
+    const { startDate, endDate } = req.body;
     if (!startDate || !endDate)
       throw ApiError.badRequest("startDate/endDate kerak");
 
@@ -34,7 +34,7 @@ const getServicesByDateRange = async (req, res, next) => {
 
 const getClientsByDateRange = async (req, res, next) => {
   try {
-    const { startDate, endDate } = req.query;
+    const { startDate, endDate } = req.body;
     if (!startDate || !endDate)
       throw ApiError.badRequest("startDate/endDate kerak");
 

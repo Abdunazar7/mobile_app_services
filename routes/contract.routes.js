@@ -7,13 +7,15 @@ const {
   updateContract,
   deleteContract,
 } = require("../controllers/contract.controller");
+const authGuard = require("../middlewares/guards/auth.guard");
+const roleGuard = require("../middlewares/guards/role.guard");
 const { validateJoi } = require("../middlewares/validators/joi.validator");
 const { createContractSchema, updateContractSchema } = require("../validators/contract.validator");
 
-router.post("/", validateJoi(createContractSchema), addContract);
-router.get("/", getContracts);
-router.get("/:id", getOneContract);
-router.put("/:id", validateJoi(updateContractSchema), updateContract);
-router.delete("/:id", deleteContract);
+router.post("/", authGuard, roleGuard("admin"), validateJoi(createContractSchema), addContract);
+router.get("/", authGuard, getContracts);
+router.get("/:id", authGuard, getOneContract);
+router.put("/:id", authGuard, roleGuard("admin"), validateJoi(updateContractSchema), updateContract);
+router.delete("/:id", authGuard, roleGuard("admin"), deleteContract);
 
 module.exports = router;

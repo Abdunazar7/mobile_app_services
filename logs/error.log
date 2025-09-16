@@ -87,3 +87,14 @@
 2025-09-16 17:28:15 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
 2025-09-16 17:28:15 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
 2025-09-16 17:28:15 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 18:58:07 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-16 18:59:29 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-16 18:59:31 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-16 19:05:16 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-16 19:08:22 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-16 19:08:24 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-16 19:08:49 [Mobile-Service-API] [31merror[39m: error is not defined
+2025-09-16 19:09:29 [Mobile-Service-API] [31merror[39m: error is not defined
+2025-09-16 19:16:10 [Mobile-Service-API] [31merror[39m: undefined
+2025-09-16 19:18:06 [Mobile-Service-API] [31merror[39m: startDate/endDate kerak
+2025-09-16 19:19:33 [Mobile-Service-API] [31merror[39m: undefined

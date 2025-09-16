@@ -7,6 +7,7 @@ const {
   deleteClient,
 } = require("../controllers/client.controller");
 const authGuard = require("../middlewares/guards/auth.guard");
+const roleGuard = require("../middlewares/guards/role.guard");
 const selfGuard = require("../middlewares/guards/self.guard");
 
 const { validateJoi } = require("../middlewares/validators/joi.validator");
@@ -16,8 +17,8 @@ const {
 } = require("../validators/client.validator");
 
 router.post("/", validateJoi(createClientSchema), addClient);
-router.get("/", getClients);
-router.get("/:id", getOneClient);
+router.get("/", authGuard, roleGuard("admin"), getClients);
+router.get("/:id", authGuard, getOneClient);
 router.put("/:id", authGuard, selfGuard, validateJoi(updateClientSchema), updateClient);
 router.delete("/:id", authGuard, selfGuard, deleteClient);
 

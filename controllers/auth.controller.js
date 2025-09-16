@@ -10,11 +10,11 @@ const adminLogin = async (req, res) => {
     console.log(admin);
     
     if (!admin) {
-      return res.status(401).json({ message: "Invalid password or email 1" });
+      return res.status(401).json({ message: "Invalid password or email" });
     }
     const isPassMatch = await bcrypt.compare(password, admin.password);
     if (!isPassMatch) {
-      return res.status(401).json({ message: "Invalid password or email 2" });
+      return res.status(401).json({ message: "Invalid password or email" });
     }
     const payload = {
       id: admin.id,
@@ -42,21 +42,23 @@ const adminLogout = async (req, res) => {
     if (!refreshToken) {
       return res.status(400).json({ message: "Token not found" });
     }
-    const payload = jwtService.verifyRefreshToken(refreshToken);
+    const payload = await jwtService.verifyRefreshToken(refreshToken);
     if (!payload) {
-      return res.status(401).json({ message: "Token yaroqsiz" });
+      return res.status(401).json({ message: "Token invalid" });
     }
+    console.log(payload);
+    
     const admin = await Admin.findByPk(payload.id);
     if (!admin) {
-      return res.status(404).json({ message: "Admin topilmadi" });
+      return res.status(404).json({ message: "Admin not found" });
     }
     admin.refresh_token = null;
     await admin.save();
     res.clearCookie("refreshToken");
-    res.status(200).json({ message: "Tizimdan muvaffaqiyatli chiqildi" });
+    res.status(200).json({ message: "Successfully logged out" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Serverda xatolik" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -83,10 +85,10 @@ const clientLogin = async (req, res) => {
       maxAge: config.get("cookie_refresh_token_time"),
       httpOnly: true,
     });
-    res.status(200).json({ message: "Mijoz tizimga muvaffaqiyatli kirdi", accessToken: tokens.accessToken });
+    res.status(200).json({ message: "Successfully logged in", accessToken: tokens.accessToken });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Serverda xatolik" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -96,8 +98,8 @@ const clientLogout = async (req, res) => {
     if (!refreshToken) {
       return res.status(400).json({ message: "Token not found" });
     }
-    const payload = jwtService.verifyRefreshToken(refreshToken);
-    if (!payload || payload.role !== 'client') { // Rolni tekshirish
+    const payload = await jwtService.verifyRefreshToken(refreshToken);
+    if (!payload || payload.role !== 'client') {
       return res.status(401).json({ message: "Invalid token" });
     }
     const client = await Client.findByPk(payload.id);
@@ -151,7 +153,7 @@ const providerLogout = async (req, res) => {
     if (!refreshToken) {
       return res.status(400).json({ message: "Token not found" });
     }
-    const payload = jwtService.verifyRefreshToken(refreshToken);
+    const payload = await jwtService.verifyRefreshToken(refreshToken);
     if (!payload || payload.role !== 'provider') {
       return res.status(401).json({ message: "Invalid token" });
     }
@@ -176,7 +178,7 @@ const refreshToken = async (req, res) => {
       return res.status(400).json({ message: "Token not found" });
     }
 
-    const payload = jwtService.verifyRefreshToken(refreshToken);
+    const payload = await jwtService.verifyRefreshToken(refreshToken);
     if (!payload) {
       return res.status(401).json({ message: "Invalid or expired token" });
     }

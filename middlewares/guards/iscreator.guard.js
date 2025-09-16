@@ -1,15 +1,11 @@
-const { sendErrorResponse } = require("../../helpers/send.response.errors");
+const { error } = require("winston");
 
-module.exports = (req, res, next) => {
+module.exports = (req, res, next,) => {
   const { user } = req;
 
   if (user && user.role === 'admin' && user.is_creator) {
     return next();
+  }else{
+    next(error)
   }
-
-  sendErrorResponse(
-    res,
-    { message: "Only super admin permitted" },
-    403
-  );
 };

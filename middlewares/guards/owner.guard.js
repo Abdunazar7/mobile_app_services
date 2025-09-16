@@ -1,5 +1,5 @@
+const ApiError = require("../../helpers/api.error");
 const { MobileAppService } = require("../../models/index.models");
-const { sendErrorResponse } = require("../../helpers/send.response.errors");
 
 module.exports = async (req, res, next) => {
   try {
@@ -12,15 +12,15 @@ module.exports = async (req, res, next) => {
     
     const service = await MobileAppService.findByPk(id);
     if (!service) {
-      return sendErrorResponse(res, { message: "Service not founds" }, 404);
+      ApiError.notFound("Service not found")
     }
 
     if (service.owner_id !== user.id) {
-      return sendErrorResponse(res, { message: "User unathorized" }, 403);
+      ApiError.notFound("Provider not found")
     }
 
     next();
   } catch (error) {
-    sendErrorResponse(res, error);
+      next(error)
   }
 };
