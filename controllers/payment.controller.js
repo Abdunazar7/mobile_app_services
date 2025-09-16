@@ -1,28 +1,27 @@
 const { Payment } = require("../models/index.models");
-const { sendErrorResponse } = require("../helpers/send.response.errors");
 
 // Create
-const addPayment = async (req, res) => {
+const addPayment = async (req, res, next) => {
   try {
     const newPayment = await Payment.create(req.body);
     res.status(201).json({ message: "Payment received", data: newPayment });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get all
-const getPayments = async (req, res) => {
+const getPayments = async (req, res, next) => {
   try {
     const payments = await Payment.findAll();
     res.status(200).json({ message: "Successfully retrieved", data: payments });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get one
-const getOnePayment = async (req, res) => {
+const getOnePayment = async (req, res, next) => {
   try {
     const { id } = req.params;
     const payment = await Payment.findByPk(id);
@@ -31,12 +30,12 @@ const getOnePayment = async (req, res) => {
     }
     res.status(200).json({ message: "Successfully retrieved", data: payment });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Update
-const updatePayment = async (req, res) => {
+const updatePayment = async (req, res, next) => {
   try {
     const { id } = req.params;
     const [rows, [updatedPayment]] = await Payment.update(req.body, {
@@ -48,12 +47,12 @@ const updatePayment = async (req, res) => {
     }
     res.status(200).json({ message: "Payment data updated", data: updatedPayment });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Delete
-const deletePayment = async (req, res) => {
+const deletePayment = async (req, res, next) => {
   try {
     const { id } = req.params;
     const deleted = await Payment.destroy({ where: { id } });
@@ -62,7 +61,7 @@ const deletePayment = async (req, res) => {
     }
     res.status(200).json({ message: "Payment deleted" });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 

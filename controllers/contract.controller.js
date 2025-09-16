@@ -1,14 +1,12 @@
 const { Contract, MobileAppService, Status } = require("../models/index.models");
-const { sendErrorResponse } = require("../helpers/send.response.errors");
 
 // Create
-const addContract = async (req, res) => {
+const addContract = async (req, res, next) => {
   try {
-    const client_id = req.user.id;
-    const { owner_id, service_id } = req.body;
+    const { owner_id, service_id, client_id, start_date } = req.body;
 
     const service = await MobileAppService.findByPk(service_id);
-    if (!service || service.owner_id !== owner_id) {
+    if (!service || service.provider_id !== owner_id) {
         return res.status(404).json({ message: "Service or provider not found"});
     }
 
@@ -17,30 +15,35 @@ const addContract = async (req, res) => {
         return res.status(500).json({ message: "Cannot get initial status"});
     }
 
+    const contractStartDate = new Date(start_date);
+
+    const endDate = new Date(contractStartDate.setDate(contractStartDate.getDate() + service.duration_days));
+
     const newContract = await Contract.create({
       ...req.body,
       client_id: client_id,
       total_price: service.price,
-      status_id: initialStatus.id
+      status_id: initialStatus.id,
+      end_date: endDate, 
     });
     res.status(201).json({ message: "A new contract was concluded", data: newContract });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get all
-const getContracts = async (req, res) => {
+const getContracts = async (req, res, next) => {
   try {
     const contracts = await Contract.findAll({ include: [{ all: true }] });
     res.status(200).json({ message: "Successfully retrieved", data: contracts });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get one
-const getOneContract = async (req, res) => {
+const getOneContract = async (req, res, next) => {
   try {
     const { id } = req.params;
     const contract = await Contract.findByPk(id, { include: [{ all: true }] });
@@ -49,12 +52,12 @@ const getOneContract = async (req, res) => {
     }
     res.status(200).json({ message: "Shartnoma topildi", data: contract });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Update
-const updateContract = async (req, res) => {
+const updateContract = async (req, res, next) => {
   try {
     const { id } = req.params;
     const [rows, [updatedContract]] = await Contract.update(req.body, {
@@ -66,12 +69,12 @@ const updateContract = async (req, res) => {
     }
     res.status(200).json({ message: "Contract updated", data: updatedContract });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Delete
-const deleteContract = async (req, res) => {
+const deleteContract = async (req, res, next) => {
   try {
     const { id } = req.params;
     const deleted = await Contract.destroy({ where: { id } });
@@ -80,7 +83,7 @@ const deleteContract = async (req, res) => {
     }
     res.status(200).json({ message: "Contract deleted" });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 

@@ -1,4 +1,3 @@
-// /src/validations/admin.validation.js
 const Joi = require("joi");
 
 const createAdminSchema = Joi.object({

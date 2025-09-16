@@ -1,0 +1,89 @@
+2025-09-15 18:32:26 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-15 18:34:28 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-15 18:34:29 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-15 18:34:55 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-15 18:35:58 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-15 18:51:43 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-15 18:56:23 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-15 18:59:28 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-15 19:10:48 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-15 19:14:31 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-15 19:14:33 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-15 19:18:01 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-15 19:18:03 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-16 08:37:12 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-16 08:37:15 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-16 11:28:35 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-16 11:28:51 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-16 11:50:56 [Mobile-Service-API] [31merror[39m: next is not defined
+2025-09-16 11:55:01 [Mobile-Service-API] [31merror[39m: notNull Violation: mobile_app_services.provider_id cannot be null
+2025-09-16 12:03:13 [Mobile-Service-API] [31merror[39m: provider_id is not defined
+2025-09-16 12:15:29 [Mobile-Service-API] [31merror[39m: res.status is not a function
+2025-09-16 15:38:24 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'id')
+2025-09-16 15:38:27 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'id')
+2025-09-16 15:38:28 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'id')
+2025-09-16 15:38:33 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'id')
+2025-09-16 15:50:53 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'id')
+2025-09-16 15:56:57 [Mobile-Service-API] [31merror[39m: startDate is not defined
+2025-09-16 15:56:59 [Mobile-Service-API] [31merror[39m: startDate is not defined
+2025-09-16 15:57:00 [Mobile-Service-API] [31merror[39m: startDate is not defined
+2025-09-16 15:57:46 [Mobile-Service-API] [31merror[39m: startDate is not defined
+2025-09-16 15:57:47 [Mobile-Service-API] [31merror[39m: startDate is not defined
+2025-09-16 15:59:10 [Mobile-Service-API] [31merror[39m: setDate is not defined
+2025-09-16 16:04:18 [Mobile-Service-API] [31merror[39m: The 'cancelled' status is not configured in the database.
+2025-09-16 16:05:27 [Mobile-Service-API] [31merror[39m: The 'cancelled' status is not configured in the database.
+2025-09-16 16:06:32 [Mobile-Service-API] [31merror[39m: missing FROM-clause entry for table "Provider"
+2025-09-16 16:10:05 [Mobile-Service-API] [31merror[39m: column "contract_id" does not exist
+2025-09-16 16:10:22 [Mobile-Service-API] [31merror[39m: missing FROM-clause entry for table "Contract"
+2025-09-16 16:13:42 [Mobile-Service-API] [31merror[39m: missing FROM-clause entry for table "Contracts"
+2025-09-16 16:18:48 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 16:18:50 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 16:27:28 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 16:27:54 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 16:31:46 [Mobile-Service-API] [31merror[39m: WHERE parameter "app_type" has invalid "undefined" value
+2025-09-16 16:34:45 [Mobile-Service-API] [31merror[39m: WHERE parameter "app_type" has invalid "undefined" value
+2025-09-16 16:34:47 [Mobile-Service-API] [31merror[39m: WHERE parameter "app_type" has invalid "undefined" value
+2025-09-16 16:34:48 [Mobile-Service-API] [31merror[39m: WHERE parameter "app_type" has invalid "undefined" value
+2025-09-16 16:35:12 [Mobile-Service-API] [31merror[39m: missing FROM-clause entry for table "Contracts"
+2025-09-16 16:35:13 [Mobile-Service-API] [31merror[39m: missing FROM-clause entry for table "Contracts"
+2025-09-16 16:37:18 [Mobile-Service-API] [31merror[39m: WHERE parameter "app_type" has invalid "undefined" value
+2025-09-16 16:38:14 [Mobile-Service-API] [31merror[39m: WHERE parameter "app_type" has invalid "undefined" value
+2025-09-16 16:38:40 [Mobile-Service-API] [31merror[39m: missing FROM-clause entry for table "Provider"
+2025-09-16 16:38:42 [Mobile-Service-API] [31merror[39m: missing FROM-clause entry for table "Provider"
+2025-09-16 16:38:43 [Mobile-Service-API] [31merror[39m: missing FROM-clause entry for table "Provider"
+2025-09-16 16:39:07 [Mobile-Service-API] [31merror[39m: missing FROM-clause entry for table "provider"
+2025-09-16 16:39:08 [Mobile-Service-API] [31merror[39m: missing FROM-clause entry for table "provider"
+2025-09-16 16:39:09 [Mobile-Service-API] [31merror[39m: missing FROM-clause entry for table "provider"
+2025-09-16 16:40:43 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 16:40:45 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 16:40:51 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 16:43:13 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 16:43:14 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 16:46:40 [Mobile-Service-API] [31merror[39m: sequelize is not defined
+2025-09-16 16:46:41 [Mobile-Service-API] [31merror[39m: sequelize is not defined
+2025-09-16 16:46:54 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 16:46:55 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 16:50:30 [Mobile-Service-API] [31merror[39m: Named replacement ":clientId" has no entry in the replacement map.
+2025-09-16 16:50:32 [Mobile-Service-API] [31merror[39m: Named replacement ":clientId" has no entry in the replacement map.
+2025-09-16 16:59:32 [Mobile-Service-API] [31merror[39m: relation "status" does not exist
+2025-09-16 16:59:34 [Mobile-Service-API] [31merror[39m: relation "status" does not exist
+2025-09-16 17:01:02 [Mobile-Service-API] [31merror[39m: column c.updatedat does not exist
+2025-09-16 17:01:27 [Mobile-Service-API] [31merror[39m: column c.updatedat does not exist
+2025-09-16 17:03:24 [Mobile-Service-API] [31merror[39m: column c.updatedat does not exist
+2025-09-16 17:03:39 [Mobile-Service-API] [31merror[39m: syntax error at or near "FROM"
+2025-09-16 17:03:40 [Mobile-Service-API] [31merror[39m: syntax error at or near "FROM"
+2025-09-16 17:03:54 [Mobile-Service-API] [31merror[39m: syntax error at or near "FROM"
+2025-09-16 17:09:11 [Mobile-Service-API] [31merror[39m: QueryTypes is not defined
+2025-09-16 17:09:12 [Mobile-Service-API] [31merror[39m: QueryTypes is not defined
+2025-09-16 17:10:41 [Mobile-Service-API] [31merror[39m: operator does not exist: timestamp with time zone >= integer
+2025-09-16 17:12:46 [Mobile-Service-API] [31merror[39m: trailing junk after numeric literal at or near "01T00"
+2025-09-16 17:13:58 [Mobile-Service-API] [31merror[39m: operator does not exist: timestamp with time zone >= integer
+2025-09-16 17:13:59 [Mobile-Service-API] [31merror[39m: operator does not exist: timestamp with time zone >= integer
+2025-09-16 17:15:42 [Mobile-Service-API] [31merror[39m: operator does not exist: timestamp with time zone >= integer
+2025-09-16 17:28:14 [Mobile-Service-API] [31merror[39m: insert or update on table "payments" violates foreign key constraint "payments_contract_id_fkey"
+2025-09-16 17:28:14 [Mobile-Service-API] [31merror[39m: undefined is not iterable (cannot read property Symbol(Symbol.iterator))
+2025-09-16 17:28:14 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 17:28:15 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 17:28:15 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 17:28:15 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')
+2025-09-16 17:28:15 [Mobile-Service-API] [31merror[39m: Cannot read properties of undefined (reading 'query')

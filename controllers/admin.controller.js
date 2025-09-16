@@ -1,9 +1,8 @@
 const { Admin } = require("../models/index.models");
-const { sendErrorResponse } = require("../helpers/send.response.errors");
 const bcrypt = require("bcrypt");
 
 // Create
-const addAdmin = async (req, res) => {
+const addAdmin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -20,22 +19,22 @@ const addAdmin = async (req, res) => {
 
     res.status(201).json({ message: "New admin added", data: newAdmin });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get all
-const getAdmins = async (req, res) => {
+const getAdmins = async (req, res, next) => {
   try {
     const admins = await Admin.findAll();
-    res.status(200).json({ message: "Successfully retrieved", data: Admin });
+    res.status(200).json({ message: "Successfully retrieved", data: admins});
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get one
-const getOneAdmin = async (req, res) => {
+const getOneAdmin = async (req, res, next) => {
   try {
     const { id } = req.params;
     const admin = await Admin.findByPk(id);
@@ -44,12 +43,12 @@ const getOneAdmin = async (req, res) => {
     }
     res.status(200).json(admin);
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Update
-const updateAdmin = async (req, res) => {
+const updateAdmin = async (req, res, next) => {
   try {
     const { id } = req.params;
     const [rows, [updatedAdmin]] = await Admin.update(req.body, {
@@ -61,12 +60,12 @@ const updateAdmin = async (req, res) => {
     }
     res.status(200).json({ message: "Admin data updated", data: updatedAdmin });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Delete
-const deleteAdmin = async (req, res) => {
+const deleteAdmin = async (req, res, next) => {
   try {
     const { id } = req.params;
     const deleted = await Admin.destroy({ where: { id } });
@@ -75,7 +74,7 @@ const deleteAdmin = async (req, res) => {
     }
     res.status(200).json({ message: "Admin deleted" });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 

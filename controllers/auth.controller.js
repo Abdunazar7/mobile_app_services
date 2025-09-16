@@ -7,12 +7,14 @@ const adminLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
     const admin = await Admin.findOne({ where: { email } });
+    console.log(admin);
+    
     if (!admin) {
-      return res.status(401).json({ message: "Invalid password or email" });
+      return res.status(401).json({ message: "Invalid password or email 1" });
     }
     const isPassMatch = await bcrypt.compare(password, admin.password);
     if (!isPassMatch) {
-      return res.status(401).json({ message: "Invalid password or email" });
+      return res.status(401).json({ message: "Invalid password or email 2" });
     }
     const payload = {
       id: admin.id,
@@ -24,7 +26,7 @@ const adminLogin = async (req, res) => {
     await admin.save();
 
     res.cookie("refreshToken", tokens.refreshToken, {
-      maxAge: config.get("jwt.cookie_refresh_token_time"),
+      maxAge: config.get("cookie_refresh_token_time"),
       httpOnly: true,
     });
     res.status(200).json({ message: "Successfully logged in", accessToken: tokens.accessToken });
@@ -78,7 +80,7 @@ const clientLogin = async (req, res) => {
     await client.save();
 
     res.cookie("refreshToken", tokens.refreshToken, {
-      maxAge: config.get("jwt.cookie_refresh_token_time"),
+      maxAge: config.get("cookie_refresh_token_time"),
       httpOnly: true,
     });
     res.status(200).json({ message: "Mijoz tizimga muvaffaqiyatli kirdi", accessToken: tokens.accessToken });
@@ -133,7 +135,7 @@ const providerLogin = async (req, res) => {
     await provider.save();
 
     res.cookie("refreshToken", tokens.refreshToken, {
-      maxAge: config.get("jwt.cookie_refresh_token_time"),
+      maxAge: config.get("cookie_refresh_token_time"),
       httpOnly: true,
     });
     res.status(200).json({ message: "Provider successfully logged in", accessToken: tokens.accessToken });
@@ -150,7 +152,7 @@ const providerLogout = async (req, res) => {
       return res.status(400).json({ message: "Token not found" });
     }
     const payload = jwtService.verifyRefreshToken(refreshToken);
-    if (!payload || payload.role !== 'provider') { // Rolni tekshirish
+    if (!payload || payload.role !== 'provider') {
       return res.status(401).json({ message: "Invalid token" });
     }
     const provider = await Provider.findByPk(payload.id);
@@ -214,7 +216,7 @@ const refreshToken = async (req, res) => {
     await user.save();
 
     res.cookie("refreshToken", tokens.refreshToken, {
-      maxAge: config.get("jwt.cookie_refresh_token_time"),
+      maxAge: config.get("cookie_refresh_token_time"),
       httpOnly: true,
     });
 

@@ -1,9 +1,8 @@
 const { Provider } = require("../models/index.models");
-const { sendErrorResponse } = require("../helpers/send.response.errors");
 const bcrypt = require("bcrypt");
 
 // Create
-const addProvider = async (req, res) => {
+const addProvider = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const candidate = await Provider.findOne({ where: { email } });
@@ -17,24 +16,24 @@ const addProvider = async (req, res) => {
     });
     res.status(201).json({ message: "New provider added", data: newProvider });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get all
-const getProviders = async (req, res) => {
+const getProviders = async (req, res, next) => {
   try {
     const providers = await Provider.findAll();
     res
       .status(200)
       .json({ message: "Successfully retrieved", data: providers });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get one
-const getOneProvider = async (req, res) => {
+const getOneProvider = async (req, res, next) => {
   try {
     const { id } = req.params;
     const provider = await Provider.findByPk(id);
@@ -43,12 +42,12 @@ const getOneProvider = async (req, res) => {
     }
     res.status(200).json({ message: "Successfully retrieved", data: provider });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Update
-const updateProvider = async (req, res) => {
+const updateProvider = async (req, res, next) => {
   try {
     const { id } = req.params;
     const [rows, [updatedProvider]] = await Provider.update(req.body, {
@@ -62,12 +61,12 @@ const updateProvider = async (req, res) => {
       .status(200)
       .json({ message: "Provider data updated", data: updatedProvider });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Delete
-const deleteProvider = async (req, res) => {
+const deleteProvider = async (req, res, next) => {
   try {
     const { id } = req.params;
     const deleted = await Provider.destroy({ where: { id } });
@@ -76,7 +75,7 @@ const deleteProvider = async (req, res) => {
     }
     res.status(200).json({ message: "Provider deleted" });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 

@@ -6,7 +6,7 @@ module.exports = (...allowedRoles) => {
     if (user && allowedRoles.includes(user.role)) {
       next();
     } else {
-      sendErrorResponse(res, { message: "Unauthorized role" }, 403);
+      return sendErrorResponse({ message: "Unauthorized role" }, res, 401);
     }
   };
 };

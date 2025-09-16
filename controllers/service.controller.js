@@ -1,33 +1,35 @@
 const { MobileAppService } = require("../models/index.models");
-const { sendErrorResponse } = require("../helpers/send.response.errors");
 
 // Create
-const addMobileAppService = async (req, res) => {
+const addMobileAppService = async (req, res, next) => {
   try {
-    const owner_id = req.user.id;
-
     const newService = await MobileAppService.create({
-      ...req.body,
-      owner_id: owner_id,
+      provider_id: req.user.id,
+      app_type: req.body.app_type,
+      platform: req.body.platform,
+      price: req.body.price,
+      duration_days: req.body.duration_days,
+      description: req.body.description,
+      features: req.body.features,
     });
     res.status(201).json({ message: "New service added", data: newService });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get all
-const getMobileAppServices = async (req, res) => {
+const getMobileAppServices = async (req, res, next) => {
   try {
     const services = await MobileAppService.findAll();
     res.status(200).json({ message: "Successfully retrieved", data: services });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get one
-const getOneMobileAppService = async (req, res) => {
+const getOneMobileAppService = async (req, res, next) => {
   try {
     const { id } = req.params;
     const service = await MobileAppService.findByPk(id);
@@ -36,12 +38,12 @@ const getOneMobileAppService = async (req, res) => {
     }
     res.status(200).json({ message: "Successfully retrieved", data: service });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Update
-const updateMobileAppService = async (req, res) => {
+const updateMobileAppService = async (req, res, next) => {
   try {
     const { id } = req.params;
     const [rows, [updatedService]] = await MobileAppService.update(req.body, {
@@ -57,12 +59,12 @@ const updateMobileAppService = async (req, res) => {
       .status(200)
       .json({ message: "Service data updated", data: updatedService });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Delete
-const deleteMobileAppService = async (req, res) => {
+const deleteMobileAppService = async (req, res, next) => {
   try {
     const { id } = req.params;
     const deleted = await MobileAppService.destroy({
@@ -75,7 +77,7 @@ const deleteMobileAppService = async (req, res) => {
     }
     res.status(200).json({ message: "Service deleted" });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 

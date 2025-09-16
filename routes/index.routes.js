@@ -8,6 +8,8 @@ const statusRouter = require("./status.routes");
 const mobileAppServiceRouter = require("./service.routes");
 const contractRouter = require("./contract.routes");
 const paymentRouter = require("./payment.routes");
+const reportsRouter = require('./reports.routes');
+const otpRouter = require('./otp.routes');
 
 router.use("/auth", authRouter);
 router.use("/admins", adminRouter);
@@ -17,5 +19,7 @@ router.use("/statuses", statusRouter);
 router.use("/services", mobileAppServiceRouter);
 router.use("/contracts", contractRouter);
 router.use("/payments", paymentRouter);
+router.use('/reports', reportsRouter);
+router.use('/otp', otpRouter);
 
 module.exports = router;

@@ -16,7 +16,7 @@ const {
   updateAdminSchema,
 } = require("../validators/admin.validator");
 
-router.post("/", authGuard, iscreatorGuard, validateJoi(createAdminSchema), addAdmin);
+router.post("/", validateJoi(createAdminSchema), addAdmin);
 router.get("/", getAdmins);
 router.get("/:id", getOneAdmin);
 router.put("/:id", authGuard, selfGuard, validateJoi(updateAdminSchema), updateAdmin);

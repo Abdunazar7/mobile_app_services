@@ -2,6 +2,7 @@ const Joi = require("joi");
 
 const createContractSchema = Joi.object({
   owner_id: Joi.number().integer().positive().required(),
+  client_id: Joi.number().integer().positive().required(),
   service_id: Joi.number().integer().positive().required(),
   start_date: Joi.date().optional(),
 });

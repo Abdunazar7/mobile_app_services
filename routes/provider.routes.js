@@ -14,7 +14,7 @@ const { createProviderSchema, updateProviderSchema } = require("../validators/pr
 router.post("/", validateJoi(createProviderSchema), addProvider);
 router.get("/", getProviders);
 router.get("/:id", getOneProvider);
-router.put("/:id", authGuard, roleGuard("admin", "owner"), validateJoi(updateProviderSchema), updateProvider);
-router.delete("/:id", authGuard, roleGuard("admin", "owner"), deleteProvider);
+router.put("/:id", authGuard, roleGuard("admin", "provider"), validateJoi(updateProviderSchema), updateProvider);
+router.delete("/:id", authGuard, roleGuard("admin", "provider"), deleteProvider);
 
 module.exports = router;

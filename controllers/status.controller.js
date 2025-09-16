@@ -1,8 +1,7 @@
 const { Status } = require("../models/index.models");
-const { sendErrorResponse } = require("../helpers/send.response.errors");
 
 // Create
-const addStatus = async (req, res) => {
+const addStatus = async (req, res, next) => {
   try {
     const { name } = req.body;
     const candidate = await Status.findOne({ where: { name } });
@@ -12,22 +11,22 @@ const addStatus = async (req, res) => {
     const newStatus = await Status.create({ name });
     res.status(201).json({ message: "New status added", data: newStatus });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get all
-const getStatuses = async (req, res) => {
+const getStatuses = async (req, res, next) => {
   try {
     const statuses = await Status.findAll();
     res.status(200).json({ message: "Successfully retrieved", data: statuses });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get one
-const getOneStatus = async (req, res) => {
+const getOneStatus = async (req, res, next) => {
   try {
     const { id } = req.params;
     const status = await Status.findByPk(id);
@@ -36,12 +35,12 @@ const getOneStatus = async (req, res) => {
     }
     res.status(200).json({ message: "Successfully retrieved", data: status });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Update
-const updateStatus = async (req, res) => {
+const updateStatus = async (req, res, next) => {
   try {
     const { id } = req.params;
     const [rows, [updatedStatus]] = await Status.update(req.body, {
@@ -53,12 +52,12 @@ const updateStatus = async (req, res) => {
     }
     res.status(200).json({ message: "Status data updated", data: updatedStatus });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Delete
-const deleteStatus = async (req, res) => {
+const deleteStatus = async (req, res, next) => {
   try {
     const { id } = req.params;
     const deleted = await Status.destroy({ where: { id } });
@@ -67,7 +66,7 @@ const deleteStatus = async (req, res) => {
     }
     res.status(200).json({ message: "Status deleted" });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 

@@ -1,9 +1,8 @@
 const { Client } = require("../models/index.models");
-const { sendErrorResponse } = require("../helpers/send.response.errors");
 const bcrypt = require("bcrypt");
 
 // Create
-const addClient = async (req, res) => {
+const addClient = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const candidate = await Client.findOne({ where: { email } });
@@ -17,22 +16,22 @@ const addClient = async (req, res) => {
     });
     res.status(201).json({ message: "New client added", data: newClient });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get all
-const getClients = async (req, res) => {
+const getClients = async (req, res, next) => {
   try {
     const clients = await Client.findAll();
     res.status(200).json({ message: "Successfully retrieved", data: clients });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Get one
-const getOneClient = async (req, res) => {
+const getOneClient = async (req, res, next) => {
   try {
     const { id } = req.params;
     const client = await Client.findByPk(id);
@@ -41,12 +40,12 @@ const getOneClient = async (req, res) => {
     }
     res.status(200).json({ message: "Successfully retrieved", data: client });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Update
-const updateClient = async (req, res) => {
+const updateClient = async (req, res, next) => {
   try {
     const { id } = req.params;
     if (req.body.password) {
@@ -61,12 +60,12 @@ const updateClient = async (req, res) => {
     }
     res.status(200).json({ message: "Client data upadated", data: updatedClient });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
 // Delete
-const deleteClient = async (req, res) => {
+const deleteClient = async (req, res, next) => {
   try {
     const { id } = req.params;
     const deleted = await Client.destroy({ where: { id } });
@@ -75,7 +74,7 @@ const deleteClient = async (req, res) => {
     }
     res.status(200).json({ message: "Client deleted" });
   } catch (error) {
-    sendErrorResponse(res, error);
+    next(error);
   }
 };
 
